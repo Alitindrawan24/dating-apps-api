@@ -75,5 +75,7 @@ air
 ```
 
 ### 4. Deployment
-
-### 5. Testing
+- Using Docker Composer
+```bash
+docker composer up -d
+```

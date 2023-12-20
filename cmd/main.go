@@ -42,15 +42,15 @@ func main() {
 	router.POST("/register", handler.Auth.HandleRegister)
 	// POST /login
 	router.POST("/login", handler.Auth.HandleLogin)
-	// POST /logout*
 
 	// GET /match
+	router.GET("/match", middleware.Authenticator.Authenticate(), handler.Match.HandleGetMatch)
 	// POST /match
+	router.POST("/match", middleware.Authenticator.Authenticate(), handler.Match.HandleStoreMatch)
 
 	// GET /users
 	router.GET("/users", middleware.Authenticator.Authenticate(), handler.Auth.HandleUser)
 
-	// GET /users/match*
 	// POST /users/upgrade
 
 	port := 8080

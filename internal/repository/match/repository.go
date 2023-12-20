@@ -1,4 +1,4 @@
-package auth
+package match
 
 import (
 	"dating-apps-api/internal/entity"
@@ -9,8 +9,9 @@ import (
 
 // Interface of repository contains contract of the repository
 type RepositoryInterface interface {
-	FindUserByEmail(*gin.Context, string) (entity.User, error)
-	AddUser(*gin.Context, entity.User) (entity.User, error)
+	FindUserProfile(*gin.Context, entity.User) (entity.User, error)
+	UpdateOrInsertMatch(*gin.Context, int64, int64) (entity.Match, error)
+	StoreMatch(*gin.Context, entity.Match) error
 }
 
 // Struct of repository

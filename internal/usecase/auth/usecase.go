@@ -18,11 +18,6 @@ type UseCase struct {
 	authRepository auth.RepositoryInterface
 }
 
-// New returns a UseCaseInterface that can be used to interact with the repository.
-//
-// @param authRepository - The auth repository to use. Must not be nil.
-//
-// @return The use case interface for use cases that are part of the auth repository
 func New(authRepository auth.RepositoryInterface) UseCaseInterface {
 	return &UseCase{
 		authRepository,

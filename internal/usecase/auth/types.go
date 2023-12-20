@@ -3,7 +3,7 @@ package auth
 type RegisterRequest struct {
 	Email                string `json:"email" binding:"required,email,max=255"`
 	FullName             string `json:"full_name" binding:"required,max=255"`
-	Gender               string `json:"gender" binding:"required,max=255"`
+	Gender               string `json:"gender" binding:"required,max=255,oneof=m f"`
 	DateOfBirth          string `json:"date_of_birth" binding:"required"`
 	Location             string `json:"location" binding:"required,max=255"`
 	Description          string `json:"description" binding:"required,max=65535"`

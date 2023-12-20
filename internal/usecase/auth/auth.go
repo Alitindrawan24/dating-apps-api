@@ -3,6 +3,7 @@ package auth
 import (
 	"dating-apps-api/internal/entity"
 	"dating-apps-api/internal/pkg/exception"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
@@ -14,6 +15,7 @@ func (usecase *UseCase) LoginUser(ctx *gin.Context, loginRequest LoginRequest) (
 	// Call FindUserByEmail from repository to find existing user using email input
 	user, err := usecase.authRepository.FindUserByEmail(ctx, loginRequest.Email)
 	if err != nil {
+		fmt.Println(err.Error()) // Can be replaced by logging
 		return entity.User{}, err
 	}
 
@@ -38,6 +40,7 @@ func (usecase *UseCase) RegisterUser(ctx *gin.Context, registerRequest RegisterR
 	// Call FindUserByEmail from repository to find existing user using email input
 	user, err := usecase.authRepository.FindUserByEmail(ctx, registerRequest.Email)
 	if err != nil {
+		fmt.Println(err.Error()) // Can be replaced by logging
 		return entity.User{}, err
 	}
 
@@ -51,19 +54,21 @@ func (usecase *UseCase) RegisterUser(ctx *gin.Context, registerRequest RegisterR
 
 	// Mapping request into user entity
 	user = entity.User{
-		Email:       registerRequest.Email,
-		FullName:    registerRequest.FullName,
-		Gender:      registerRequest.Gender,
-		DateOfBirth: registerRequest.DateOfBirth,
-		Location:    registerRequest.Location,
-		Description: registerRequest.Description,
-		Password:    string(hashedPassword),
-		IsPremium:   false,
+		Email:          registerRequest.Email,
+		FullName:       registerRequest.FullName,
+		Gender:         registerRequest.Gender,
+		DateOfBirth:    registerRequest.DateOfBirth,
+		Location:       registerRequest.Location,
+		Description:    registerRequest.Description,
+		Password:       string(hashedPassword),
+		ProfilePicture: "https://picsum.photos/200",
+		IsPremium:      false,
 	}
 
 	// Call AddUser from repository to insert user data
 	user, err = usecase.authRepository.AddUser(ctx, user)
 	if err != nil {
+		fmt.Println(err.Error()) // Can be replaced by logging
 		return entity.User{}, err
 	}
 
