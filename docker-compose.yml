@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  dating-apps-api:
+    depends_on:
+      - postgres
+    build: .
+    labels:
+      app: dating-apps-api
+    ports:
+      - "8080:8080"
+    restart: always
+
+  postgres:
+    image: 'postgres:14.2'
+    ports:
+      - "5435:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dating_apps
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./db-data/postgres/:/var/lib/postgresql/data/
