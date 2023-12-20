@@ -40,6 +40,7 @@ cp .env.example .env
 
 - Fill the *.env* file using your own environment
 
+- Import the "Dating Apps Api DB.sql" in database/migrations folder or using migrations
 
 - Install Golang Migrator (for migrate case)
 ```bash
@@ -53,15 +54,6 @@ make migrate-up
 or using migrate command if not have installed make
 ```bash
 migrate -database ${DB_MIGRATION_CONNECTION} -path database/migrations up
-```
-
-- Seed initial data (installed golang migrator needed)
-```bash
-make seed
-```
-or using migrate command if not have installed make
-```bash
-migrate -database ${DB_SEEDER_CONNECTION} -path database/seeders up
 ```
 
 - Running the application
