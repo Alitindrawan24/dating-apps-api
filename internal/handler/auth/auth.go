@@ -107,3 +107,17 @@ func (handler *Handler) HandleUser(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, writer.APIResponse("User information successfully", true, authResponse))
 }
+
+func (handler *Handler) HandleUpgrade(ctx *gin.Context) {
+	user := ctx.MustGet("auth.user").(entity.User)
+
+	// Call usecase UpgradeUser
+	err := handler.authUseCase.UpgradeUser(ctx, user)
+	if err != nil {
+		fmt.Println(err.Error()) // Can be replaced by logging
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, writer.APIErrorResponse("Something went wrong", err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, writer.APIResponse("User upgrade to premium successfully", true, nil))
+}

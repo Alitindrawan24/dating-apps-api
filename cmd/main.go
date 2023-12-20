@@ -52,6 +52,7 @@ func main() {
 	router.GET("/users", middleware.Authenticator.Authenticate(), handler.Auth.HandleUser)
 
 	// POST /users/upgrade
+	router.POST("/users/upgrade", middleware.Authenticator.Authenticate(), handler.Auth.HandleUpgrade)
 
 	port := 8080
 	go func() {

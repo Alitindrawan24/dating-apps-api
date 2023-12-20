@@ -11,6 +11,7 @@ import (
 type RepositoryInterface interface {
 	FindUserByEmail(*gin.Context, string) (entity.User, error)
 	AddUser(*gin.Context, entity.User) (entity.User, error)
+	UpdateUser(*gin.Context, entity.User) error
 }
 
 // Struct of repository

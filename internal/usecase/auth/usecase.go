@@ -11,6 +11,7 @@ import (
 type UseCaseInterface interface {
 	LoginUser(*gin.Context, LoginRequest) (entity.User, error)
 	RegisterUser(*gin.Context, RegisterRequest) (entity.User, error)
+	UpgradeUser(*gin.Context, entity.User) error
 }
 
 // Struct of usecase

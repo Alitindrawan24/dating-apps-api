@@ -74,3 +74,17 @@ func (usecase *UseCase) RegisterUser(ctx *gin.Context, registerRequest RegisterR
 
 	return user, nil
 }
+
+func (usecase *UseCase) UpgradeUser(ctx *gin.Context, user entity.User) error {
+	// Set user premium to true
+	user.IsPremium = true
+
+	// Call UpdateUser from repository to update user premium status
+	err := usecase.authRepository.UpdateUser(ctx, user)
+	if err != nil {
+		fmt.Println(err.Error()) // Can be replaced by logging
+		return err
+	}
+
+	return nil
+}

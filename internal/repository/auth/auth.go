@@ -23,3 +23,13 @@ func (repository *Repository) AddUser(ctx *gin.Context, user entity.User) (entit
 	}
 	return user, nil
 }
+
+func (repository *Repository) UpdateUser(ctx *gin.Context, user entity.User) error {
+
+	// Save user data in database
+	err := repository.db.Where("id = ?", user.ID).Save(&user).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
